@@ -1,14 +1,12 @@
-// =============================================================
-// TEST 2: MASTRA + AI SDK
-// Purpose: Test if tool calling works when using Mastra's Agent
-//          with Ollama. Compare results to Test 1.
-// =============================================================
+// TEST 2: Mastra + AI SDK
+// Tests if tool calling works when using Mastra Agent with Ollama.
+// Compare results with Test 1.
 
 import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
 import { Agent, createTool } from "@mastra/core";
 import { z } from "zod";
 
-// ---- Step 1: Connect to Ollama (same as Test 1) ----
+// Connect to Ollama (same setup as Test 1)
 const ollama = createOpenAICompatible({
   name: "ollama",
   baseURL: "http://localhost:11434/v1",
@@ -16,8 +14,7 @@ const ollama = createOpenAICompatible({
 
 const model = ollama.chatModel("llama3.2:1b");
 
-// ---- Step 2: Define the SAME weather tool, but using Mastra's format ----
-// Mastra uses `createTool()` instead of AI SDK's `tool()`.
+// Same weather tool but using Mastra's createTool format
 const weatherTool = createTool({
   id: "weather",
   description: "Get the current weather for a given city",
@@ -30,73 +27,53 @@ const weatherTool = createTool({
     condition: z.string(),
   }),
   execute: async ({ context }) => {
-    // This is fake data — we just want to know if this function runs
-    console.log(`\n✅ TOOL WAS CALLED! Mastra agent invoked the weather tool for city: "${context.city}"`);
-    return {
-      city: context.city,
-      temperature: "25°C",
-      condition: "Sunny",
-    };
+    console.log(`\n[TOOL EXECUTED] weather tool called with city: "${context.city}"`);
+    return { city: context.city, temperature: "25C", condition: "Sunny" };
   },
 });
 
-// ---- Step 3: Create a Mastra Agent ----
+// Create a Mastra Agent with the weather tool
 const agent = new Agent({
   name: "Weather Agent",
   instructions: "You are a helpful weather assistant. Use the weather tool to answer weather questions.",
-  model: model,
+  model,
   tools: { weather: weatherTool },
 });
 
-// ---- Step 4: Send a message and see what happens ----
 async function main() {
-  console.log("=".repeat(60));
   console.log("TEST 2: Mastra + AI SDK");
   console.log("Model: llama3.2:1b via Ollama");
-  console.log("=".repeat(60));
-  console.log("\nSending message: 'What is the weather in Delhi?'");
-  console.log("Waiting for response...\n");
+  console.log("Prompt: What is the weather in Delhi?\n");
 
   try {
     const result = await agent.generate("What is the weather in Delhi?", {
       maxSteps: 3,
     });
 
-    // ---- Step 5: Analyze the result ----
-    console.log("\n" + "-".repeat(60));
-    console.log("RESULT ANALYSIS:");
-    console.log("-".repeat(60));
-
-    // Check if any tool was called by looking at the steps
     const toolCalls = result.steps?.flatMap((step) => step.toolCalls || []) || [];
     const toolResults = result.steps?.flatMap((step) => step.toolResults || []) || [];
 
+    console.log("\n--- RESULTS ---");
+
     if (toolCalls.length > 0) {
-      console.log(`\n✅ SUCCESS: The Mastra agent made ${toolCalls.length} tool call(s)!`);
-      console.log("Tool calls:", JSON.stringify(toolCalls, null, 2));
+      console.log(`Tool calls: ${toolCalls.length}`);
+      console.log("Tool calls detail:", JSON.stringify(toolCalls, null, 2));
       console.log("Tool results:", JSON.stringify(toolResults, null, 2));
     } else {
-      console.log("\n❌ FAILURE: The Mastra agent did NOT call any tools.");
-      console.log("   It probably just described the tool in plain text instead.");
+      console.log("Tool calls: 0 (agent did NOT call the tool)");
     }
 
-    console.log("\nFinal text response from agent:");
-    console.log(`"${result.text}"`);
+    console.log("\nAgent response text:");
+    console.log(result.text);
 
-    // Summary
-    console.log("\n" + "=".repeat(60));
-    if (toolCalls.length > 0) {
-      console.log("VERDICT: ✅ Tool calling WORKS with Mastra + Ollama");
-    } else {
-      console.log("VERDICT: ❌ Tool calling BROKEN with Mastra + Ollama");
-    }
-    console.log("=".repeat(60));
+    console.log("\n--- VERDICT ---");
+    console.log(toolCalls.length > 0
+      ? "PASS - Tool calling works with Mastra + Ollama"
+      : "FAIL - Tool calling broken with Mastra + Ollama"
+    );
   } catch (error) {
-    console.error("\n💥 ERROR:", error.message);
-    if (error.cause) {
-      console.error("Cause:", error.cause);
-    }
-    console.log("\nMake sure Ollama is running: ollama serve");
+    console.error("ERROR:", error.message);
+    if (error.cause) console.error("Cause:", error.cause);
   }
 }
 
