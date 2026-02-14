@@ -1,0 +1,15 @@
+{
+  "name": "test2-mastra",
+  "version": "1.0.0",
+  "description": "Test tool calling with Mastra + AI SDK using Ollama",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@ai-sdk/openai-compatible": "^0.2.14",
+    "@mastra/core": "^0.10.5",
+    "ai": "^4.3.15",
+    "zod": "^3.24.2"
+  }
+}
