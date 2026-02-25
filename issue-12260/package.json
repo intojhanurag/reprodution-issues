@@ -1,0 +1,14 @@
+{
+  "name": "issue-12260-repro",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "npx tsx src/test-metadata-filtering.ts"
+  },
+  "dependencies": {
+    "@mastra/memory": "link:../../mastra/packages/memory",
+    "@mastra/pg": "link:../../mastra/stores/pg",
+    "tsx": "^4.19.0"
+  }
+}
