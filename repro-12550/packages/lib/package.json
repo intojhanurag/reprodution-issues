@@ -1,0 +1,9 @@
+{
+  "name": "@repro/lib",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "better-auth": "^1.2.0"
+  }
+}

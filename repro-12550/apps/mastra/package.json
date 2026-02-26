@@ -1,0 +1,14 @@
+{
+  "name": "mastra-app",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "mastra dev"
+  },
+  "dependencies": {
+    "@mastra/core": "latest",
+    "@mastra/deployer": "latest",
+    "mastra": "latest"
+  }
+}
