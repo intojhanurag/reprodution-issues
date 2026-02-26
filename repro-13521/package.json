@@ -1,17 +1,15 @@
 {
   "name": "repro-13521",
-  "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "tsx src/index.ts"
+    "repro": "tsx src/index.ts"
   },
   "dependencies": {
-    "@mastra/core": "workspace:*",
-    "@mastra/mcp": "workspace:*",
+    "@mastra/core": "link:/home/anurag2004/mastra/packages/core",
+    "@mastra/mcp": "link:/home/anurag2004/mastra/packages/mcp",
     "@modelcontextprotocol/sdk": "^1.20.1",
-    "zod": "^3.24.4",
-    "zod-to-json-schema": "^3.24.5"
+    "zod": "^3.24.4"
   },
   "devDependencies": {
     "tsx": "^4.21.0",
