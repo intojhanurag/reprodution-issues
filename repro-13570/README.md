@@ -72,12 +72,28 @@ if (mastra.getStorage()) {
 }
 ```
 
+## DDL Statements Executed on Startup (Before Fix)
+
+With `disableInit: true`, the server should execute **0** DDL statements.
+Instead, it executed **~191** schema-modifying statements:
+
+| DDL Type | Count |
+|---|---|
+| CREATE TABLE | 27 |
+| ALTER TABLE (ADD COLUMN, ADD CONSTRAINT, REPLICA IDENTITY) | ~133 |
+| CREATE INDEX / CREATE UNIQUE INDEX | 28 |
+| CREATE OR REPLACE FUNCTION | 1 |
+| DROP TRIGGER | 1 |
+| CREATE TRIGGER | 1 |
+| **Total** | **~191** |
+
 ## Expected vs Actual
 
-| | Expected | Actual |
-|---|---|---|
-| DDL on startup | **None** (disableInit: true) | CREATE TABLE + ALTER TABLE for all 14 domain stores |
-| Auto-init on method call | Skipped | Skipped (this part works correctly) |
+| | Expected | Actual (Before Fix) | After Fix |
+|---|---|---|---|
+| DDL on startup (`disableInit: true`) | **0** | **~191** statements | **0** |
+| DDL on startup (`disableInit` not set) | All tables/indexes created | All tables/indexes created | All tables/indexes created |
+| Auto-init on method call | Skipped when `disableInit: true` | Skipped (works correctly) | Skipped (unchanged) |
 
 ## Cleanup
 
