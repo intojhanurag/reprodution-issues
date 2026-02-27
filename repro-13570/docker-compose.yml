@@ -1,0 +1,22 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: repro-13570-pg
+    ports:
+      - "5499:5432"
+    environment:
+      POSTGRES_USER: mastra
+      POSTGRES_PASSWORD: mastra
+      POSTGRES_DB: mastra
+    # Enable DDL statement logging so we can see CREATE TABLE / ALTER TABLE
+    command:
+      - "postgres"
+      - "-c"
+      - "log_statement=ddl"
+      - "-c"
+      - "log_destination=stderr"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mastra"]
+      interval: 2s
+      timeout: 5s
+      retries: 10

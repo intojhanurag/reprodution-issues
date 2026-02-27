@@ -1,0 +1,18 @@
+{
+  "name": "repro-13570-disable-init",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "npx mastra build",
+    "start": "node .mastra/output/index.mjs",
+    "dev": "npx mastra dev",
+    "repro:build": "docker compose up -d && sleep 3 && echo '=== Building ===' && npx mastra build && echo '=== Starting server (watch docker logs in another terminal) ===' && node .mastra/output/index.mjs",
+    "repro:dev": "docker compose up -d && sleep 3 && npx mastra dev",
+    "logs": "docker compose logs -f postgres 2>&1 | grep -iE 'CREATE|ALTER|statement'"
+  },
+  "dependencies": {
+    "@mastra/core": "^1.7.0",
+    "@mastra/pg": "^1.6.1"
+  }
+}
