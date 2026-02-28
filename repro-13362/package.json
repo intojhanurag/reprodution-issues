@@ -1,14 +1,16 @@
 {
-  "name": "mastra-e2e-test",
+  "name": "repro-13362",
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "test": "tsx test.ts"
+    "demo": "tsx src/demo.ts",
+    "demo:error": "tsx src/demo-error.ts"
   },
   "dependencies": {
     "@mastra/core": "file:/home/anurag2004/mastra/packages/core",
     "@mastra/memory": "file:/home/anurag2004/mastra/packages/memory",
     "@ai-sdk/groq": "^1.0.0",
-    "tsx": "^4.0.0"
+    "tsx": "^4.0.0",
+    "zod": "^3.23.0"
   }
 }
