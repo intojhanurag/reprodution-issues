@@ -1,0 +1,40 @@
+{
+  "name": "better-auth-test-cases",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "setup": "tsx shared/setup-db.ts",
+    "case:old-broken": "tsx case1-old-broken/test.ts",
+    "case:cookie-only": "tsx case2-cookie-only/test.ts",
+    "case:bearer-only": "tsx case3-bearer-only/test.ts",
+    "case:both": "tsx case4-cookie-and-bearer/test.ts",
+    "case:cross-origin": "tsx case5-cross-origin-cookie/test.ts",
+    "test:all": "tsx run-all.ts"
+  },
+  "dependencies": {
+    "@mastra/core": "^1.8.0",
+    "@mastra/server": "./mastra-server-1.8.0.tgz",
+    "@mastra/hono": "./mastra-hono-1.1.7.tgz",
+    "@mastra/auth-better-auth": "./mastra-auth-better-auth-1.0.1.tgz",
+    "better-auth": "^1.5.0",
+    "better-sqlite3": "^11.0.0",
+    "hono": "^4.0.0",
+    "@hono/node-server": "^1.0.0",
+    "tsx": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.0",
+    "typescript": "^5.0.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "better-sqlite3",
+      "esbuild"
+    ],
+    "overrides": {
+      "@mastra/server": "file:./mastra-server-1.8.0.tgz",
+      "@mastra/hono": "file:./mastra-hono-1.1.7.tgz",
+      "@mastra/auth-better-auth": "file:./mastra-auth-better-auth-1.0.1.tgz"
+    }
+  }
+}
