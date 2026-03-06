@@ -1,0 +1,10 @@
+{
+  "name": "repro-13899",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Reproduction for https://github.com/mastra-ai/mastra/issues/13899",
+  "dependencies": {
+    "fetch-to-node": "2.1.0"
+  }
+}
