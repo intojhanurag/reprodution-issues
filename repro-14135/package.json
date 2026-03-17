@@ -1,0 +1,8 @@
+{
+  "name": "repro-14135",
+  "private": true,
+  "description": "Reproduction for mastra-ai/mastra#14135 — PostHog Tools tab empty",
+  "dependencies": {
+    "posthog-node": "^4.18.0"
+  }
+}
