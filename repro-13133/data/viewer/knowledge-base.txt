@@ -1,0 +1,14 @@
+CloudDocs Help Center
+=====================
+
+Q: How do I upload a file?
+A: Click the "Upload" button in the top-right corner, then drag and drop your files.
+
+Q: What is the maximum file size?
+A: Free plan: 50MB per file. Pro plan: 5GB per file.
+
+Q: How do I share a file?
+A: Right-click any file and select "Share". You can share via link or email.
+
+Q: Can I recover deleted files?
+A: Yes! Deleted files stay in Trash for 30 days. Go to Trash and click "Restore".

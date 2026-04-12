@@ -1,0 +1,5 @@
+Welcome to CloudDocs!
+
+CloudDocs is a cloud storage platform that lets you store, share, and collaborate on files.
+
+To get started, sign up at clouddocs.com/signup.

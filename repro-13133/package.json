@@ -1,0 +1,17 @@
+{
+  "name": "clouddocs-demo",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "tsx src/app.ts"
+  },
+  "dependencies": {
+    "@mastra/core": "link:../mastra/packages/core",
+    "@ai-sdk/anthropic": "^1.0.0",
+    "tsx": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.0"
+  }
+}

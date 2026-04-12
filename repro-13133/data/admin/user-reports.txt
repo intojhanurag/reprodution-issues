@@ -1,0 +1,5 @@
+Monthly Active Users: 12,450
+Churned Users (March): 87
+New Signups (March): 1,203
+Revenue: $234,500
+Top Feature: AI File Search (used by 78% of users)

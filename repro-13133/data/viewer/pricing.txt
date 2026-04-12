@@ -1,0 +1,7 @@
+CloudDocs Pricing
+=================
+
+Free Plan:    $0/month   - 5GB storage, 50MB file limit
+Pro Plan:     $12/month  - 100GB storage, 5GB file limit, priority support
+Business:     $29/month  - 1TB storage, unlimited file size, admin controls
+Enterprise:   Custom     - Unlimited everything, SSO, dedicated support
